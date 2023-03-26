@@ -53,22 +53,26 @@ public class MowerProgramProcessor implements ProcessMowers {
 			Garden garden = this.processGardenSizeLimitLine(gardenSizeLimit);
 
 			if (garden == null) {
-				log.error("The file is badly formatted");
+				log.error("The file is badly formatted: Instruction for the garden limit is badly formatted");
 				return result;
 			}
 
 			// get a sublist of lines for every mower in the file
 			List<List<String>> subLists = ListUtils.partition(allFileLines, allFileLines.size() / 2);
-			for (List<String> sublist : subLists) {
+			
+			for (int i = 1; i <= subLists.size(); i++) {
+
 				Mower mower = null;
 
-				for (String line : sublist) {
+				for (String line : subLists.get(i - 1)) {
 					mower = processInitialMowerPositionLine(mower, garden, line);
 					mower = this.processInstructionsLine(mower, line);
 				}
 
 				if (mower != null) {
 					result.add(mower);
+				} else {
+					log.error("The file is badly formatted: Instructions for Mower {} are badly formatted", i);
 				}
 			}
 
@@ -96,8 +100,8 @@ public class MowerProgramProcessor implements ProcessMowers {
 					mower = this.executeInstruction(new TurnLeftMower(mower));
 				}
 			}
-			log.info("The Last position of the mower is ( {} {} {} )", mower.getPosition().getX(), mower.getPosition().getY(),
-					mower.getOrientation().getOrientationCode());
+			log.info("The Last position of the mower is ( {} {} {} )", mower.getPosition().getX(),
+					mower.getPosition().getY(), mower.getOrientation().getOrientationCode());
 		}
 		return mower;
 	}
@@ -133,6 +137,7 @@ public class MowerProgramProcessor implements ProcessMowers {
 							Integer.valueOf(mowerInitilPosition[1])))
 					.garden(garden).orientation(Orientation.getOrientation(mowerInitilPosition[2])).build();
 		}
+
 		return mower;
 	}
 
