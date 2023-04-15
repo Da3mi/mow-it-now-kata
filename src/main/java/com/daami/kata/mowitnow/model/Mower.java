@@ -11,6 +11,5 @@ public class Mower {
 	
 	private final Position position;
 	private final Orientation orientation;
-	private final Garden garden;
-	
+
 }

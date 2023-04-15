@@ -27,9 +27,9 @@ public class MowerControlTest {
 		Position gardenLimitPosition = Position.builder().x(4).y(4).build();
 		Garden garden = Garden.builder().gardenLimitPosition(gardenLimitPosition).build();
 		Position mowerPosition = Position.builder().x(1).y(2).build();
-		Mower mower = Mower.builder().position(mowerPosition).garden(garden).orientation(Orientation.North).build();
+		Mower mower = Mower.builder().position(mowerPosition).orientation(Orientation.North).build();
 
-		mowerControl = new AdvanceMower(mower);
+		mowerControl = new AdvanceMower(mower, garden);
 		Mower result = mowerControl.execute();
 
 		Position expectedPostion = Position.builder().x(1).y(3).build();
@@ -43,9 +43,9 @@ public class MowerControlTest {
 		Position gardenLimitPosition = Position.builder().x(4).y(4).build();
 		Garden garden = Garden.builder().gardenLimitPosition(gardenLimitPosition).build();
 		Position mowerPosition = Position.builder().x(1).y(4).build();
-		Mower mower = Mower.builder().position(mowerPosition).garden(garden).orientation(Orientation.North).build();
+		Mower mower = Mower.builder().position(mowerPosition).orientation(Orientation.North).build();
 
-		mowerControl = new AdvanceMower(mower);
+		mowerControl = new AdvanceMower(mower, garden);
 		Mower result = mowerControl.execute();
 
 		Position expectedPostion = Position.builder().x(1).y(4).build();
@@ -59,9 +59,9 @@ public class MowerControlTest {
 		Position gardenLimitPosition = Position.builder().x(4).y(4).build();
 		Garden garden = Garden.builder().gardenLimitPosition(gardenLimitPosition).build();
 		Position mowerPosition = Position.builder().x(4).y(1).build();
-		Mower mower = Mower.builder().position(mowerPosition).garden(garden).orientation(Orientation.East).build();
+		Mower mower = Mower.builder().position(mowerPosition).orientation(Orientation.East).build();
 
-		mowerControl = new AdvanceMower(mower);
+		mowerControl = new AdvanceMower(mower, garden);
 		Mower result = mowerControl.execute();
 
 		Position expectedPostion = Position.builder().x(4).y(1).build();

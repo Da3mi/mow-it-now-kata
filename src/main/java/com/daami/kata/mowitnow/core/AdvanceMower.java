@@ -1,5 +1,6 @@
 package com.daami.kata.mowitnow.core;
 
+import com.daami.kata.mowitnow.model.Garden;
 import com.daami.kata.mowitnow.model.Mower;
 import com.daami.kata.mowitnow.model.Position;
 import com.daami.kata.mowitnow.port.ControlMower;
@@ -9,8 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AdvanceMower extends ControlMower {
 
-	public AdvanceMower(Mower mower) {
-		super(mower);
+	public AdvanceMower(Mower mower, Garden garden) {
+		super(mower, garden);
 	}
 
 	@Override
@@ -18,7 +19,7 @@ public class AdvanceMower extends ControlMower {
 		log.info("The mower is moving forwad: {}", this.mower.getOrientation());
 		switch (this.mower.getOrientation()) {
 		case North:
-			if (this.mower.getPosition().getY() >= mower.getGarden().getGardenLimitPosition().getY()) {
+			if (this.mower.getPosition().getY() >= garden.getGardenLimitPosition().getY()) {
 				this.logStoppedMower();
 				return this.mower;
 			}
@@ -27,7 +28,7 @@ public class AdvanceMower extends ControlMower {
 		case South:
 			return this.buildAdvancedMower(this.mower.getPosition().getX(), this.mower.getPosition().getY() - 1);
 		case East:
-			if (this.mower.getPosition().getX() >= mower.getGarden().getGardenLimitPosition().getX()) {
+			if (this.mower.getPosition().getX() >= garden.getGardenLimitPosition().getX()) {
 				this.logStoppedMower();
 				return this.mower;
 			}
@@ -51,7 +52,6 @@ public class AdvanceMower extends ControlMower {
 
 	private Mower buildAdvancedMower(int x, int y) {
 		return Mower.builder().position(Position.builder().x(x).y(y).build()).orientation(this.mower.getOrientation())
-				.garden(this.mower.getGarden())
 				.build();
 	}
 

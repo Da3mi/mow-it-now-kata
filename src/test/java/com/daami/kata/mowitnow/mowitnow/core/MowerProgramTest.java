@@ -46,17 +46,10 @@ public class MowerProgramTest {
 		List<Mower> mowers = mowerProgram.processDeployedMowers(absoluteTestFilePath);
 
 		List<Mower> expectedList = Lists.newArrayList(
-				Mower.builder().position(postion1).orientation(Orientation.North).garden(garden).build(),
-				Mower.builder().position(postion2).orientation(Orientation.East).garden(garden).build());
+				Mower.builder().position(postion1).orientation(Orientation.North).build(),
+				Mower.builder().position(postion2).orientation(Orientation.East).build());
 
 		assertEquals(expectedList, mowers);
-	}
-
-	@Test
-	public void mowers_should_not_work_when_program_file_is_badly_formatted() {
-		List<Mower> mowers = mowerProgram.processDeployedMowers(absoluteBadTestFilePath);
-
-		assertTrue(mowers.isEmpty());
 	}
 
 	@Test

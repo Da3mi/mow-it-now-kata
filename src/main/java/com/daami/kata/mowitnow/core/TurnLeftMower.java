@@ -35,7 +35,7 @@ public class TurnLeftMower extends ControlMower {
 	}
 
 	private Mower buildTurnedLeftMower(Orientation orientation) {
-		return Mower.builder().position(super.buildActualPosition()).garden(mower.getGarden()).orientation(orientation)
+		return Mower.builder().position(super.buildActualPosition()).orientation(orientation)
 				.build();
 	}
 
